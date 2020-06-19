@@ -29,6 +29,7 @@ class MovieItem extends React.Component {
         backdrop_path,
         overview,
         id,
+        addMovieToWillWatch,
         deleteMovie
       }
     } = this.props;
@@ -38,9 +39,12 @@ class MovieItem extends React.Component {
           src={`https://image.tmdb.org/t/p/w500${backdrop_path || poster_path}`}
           alt={title}
         />
-        <p>Titile: {title}</p>
+        <p className="card-title">Titile: {title}</p>
         <p>Rating: {vote_average}</p>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div
+          style={{ display: "flex", justifyContent: "space-between" }}
+          className="d-flex flex-wrap"
+        >
           <button
             type="button"
             className={
@@ -73,6 +77,15 @@ class MovieItem extends React.Component {
             onClick={this.HandelLike}
           >
             {this.state.like === true ? "Disike" : "like"}
+          </button>
+          <button
+            type="button"
+            className="btn btn-dark w-100"
+            onClick={() => {
+              this.props.addMovieToWillWatch(id);
+            }}
+          >
+            Will watch
           </button>
         </div>
 

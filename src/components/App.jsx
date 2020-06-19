@@ -14,7 +14,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: moviesData
+      movies: moviesData,
+      movieswatch: []
     };
   }
   deleteMovie = id => {
@@ -27,22 +28,37 @@ class App extends React.Component {
       movies: updateMovies
     });
   };
+  addMovieToWillWatch = id => {
+    const updWillWatch = [...this.state.movieswatch];
+    const addWatchMovies = this.state.movies.filter(item => item.id === id);
+    updWillWatch.push(addWatchMovies);
+    this.setState({
+      movieswatch: updWillWatch
+    });
+  };
 
   render() {
     return (
-      <div className="row m-1">
-        <div className="col-8 d-flex justify-content-around flex-wrap">
-          {this.state.movies.map(movie => (
-            <MovieItem
-              data={movie}
-              deleteItem={this.deleteMovie}
-              deleteMovie={this.deleteMovie}
-              key={movie.id}
-            />
-          ))}
-        </div>
+      <div className="container">
+        <div className="row m-1">
+          <div className="col col-9">
+            <div className="d-flex justify-content-around flex-wrap">
+              {this.state.movies.map(movie => (
+                <MovieItem
+                  data={movie}
+                  deleteItem={this.deleteMovie}
+                  deleteMovie={this.deleteMovie}
+                  addMovieToWillWatch={this.addMovieToWillWatch}
+                  key={movie.id}
+                />
+              ))}
+            </div>
+          </div>
 
-        <div className="col-4" />
+          <div className="col-3">
+            <p>Will watch: {this.state.movieswatch.length}</p>
+          </div>
+        </div>
       </div>
     );
   }
