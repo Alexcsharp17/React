@@ -7,7 +7,8 @@ class MovieItem extends React.Component {
     super(props);
     this.state = {
       show: false,
-      like: false
+      like: false,
+      willWatch: false
     };
   }
   toggleOverview = () => {
@@ -30,6 +31,7 @@ class MovieItem extends React.Component {
         overview,
         id,
         addMovieToWillWatch,
+        removeMovieFromWillWatch,
         deleteMovie
       }
     } = this.props;
@@ -78,15 +80,33 @@ class MovieItem extends React.Component {
           >
             {this.state.like === true ? "Disike" : "like"}
           </button>
-          <button
-            type="button"
-            className="btn btn-dark w-100"
-            onClick={() => {
-              this.props.addMovieToWillWatch(id);
-            }}
-          >
-            Will watch
-          </button>
+          {this.state.willWatch === true ? (
+            <button
+              type="button"
+              className="btn btn-success w-100"
+              onClick={() => {
+                this.setState({
+                  willWatch: false
+                });
+                this.props.removeMovieFromWillWatch(this.props.data);
+              }}
+            >
+              Delete from will watch
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="btn btn-dark w-100"
+              onClick={() => {
+                this.setState({
+                  willWatch: true
+                });
+                this.props.addMovieToWillWatch(this.props.data);
+              }}
+            >
+              Add to will watch
+            </button>
+          )}
         </div>
 
         {this.state.show === true ? <p>{overview}</p> : null}

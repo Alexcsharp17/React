@@ -28,12 +28,23 @@ class App extends React.Component {
       movies: updateMovies
     });
   };
-  addMovieToWillWatch = id => {
-    const updWillWatch = [...this.state.movieswatch];
-    const addWatchMovies = this.state.movies.filter(item => item.id === id);
-    updWillWatch.push(addWatchMovies);
+  addMovieToWillWatch = movie => {
+    const updWillWatch = [...this.state.movieswatch, movie];
+    console.log(updWillWatch);
+
     this.setState({
       movieswatch: updWillWatch
+    });
+  };
+  removeMovieFromWillWatch = movie => {
+    const updateMoviesWillWatch = this.state.movieswatch.filter(
+      item => item.id !== movie.id
+    );
+    console.log(updateMoviesWillWatch);
+
+    // this.state.movies = updateMovies;
+    this.setState({
+      movieswatch: updateMoviesWillWatch
     });
   };
 
@@ -49,6 +60,7 @@ class App extends React.Component {
                   deleteItem={this.deleteMovie}
                   deleteMovie={this.deleteMovie}
                   addMovieToWillWatch={this.addMovieToWillWatch}
+                  removeMovieFromWillWatch={this.removeMovieFromWillWatch}
                   key={movie.id}
                 />
               ))}
