@@ -18,9 +18,9 @@ class App extends React.Component {
       movieswatch: []
     };
   }
-  deleteMovie = id => {
+  deleteMovie = (id) => {
     console.log(id);
-    const updateMovies = this.state.movies.filter(item => item.id !== id);
+    const updateMovies = this.state.movies.filter((item) => item.id !== id);
     console.log(updateMovies);
 
     // this.state.movies = updateMovies;
@@ -28,7 +28,7 @@ class App extends React.Component {
       movies: updateMovies
     });
   };
-  addMovieToWillWatch = movie => {
+  addMovieToWillWatch = (movie) => {
     const updWillWatch = [...this.state.movieswatch, movie];
     console.log(updWillWatch);
 
@@ -36,9 +36,9 @@ class App extends React.Component {
       movieswatch: updWillWatch
     });
   };
-  removeMovieFromWillWatch = movie => {
+  removeMovieFromWillWatch = (movie) => {
     const updateMoviesWillWatch = this.state.movieswatch.filter(
-      item => item.id !== movie.id
+      (item) => item.id !== movie.id
     );
     console.log(updateMoviesWillWatch);
 
@@ -54,7 +54,7 @@ class App extends React.Component {
         <div className="row m-1">
           <div className="col col-9">
             <div className="d-flex justify-content-around flex-wrap">
-              {this.state.movies.map(movie => (
+              {this.state.movies.map((movie) => (
                 <MovieItem
                   data={movie}
                   deleteItem={this.deleteMovie}
@@ -68,7 +68,7 @@ class App extends React.Component {
           </div>
 
           <div className="col-3">
-            <p>Will watch: {this.state.movieswatch.length}</p>
+            <p>Will watchdddd: {this.state.movieswatch.length}</p>
           </div>
         </div>
       </div>
